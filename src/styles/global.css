@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --spotlight-x: 50%;
+    --spotlight-y: 50%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #0B0C0E;
+    color: #F4F4F5;
+  }
+
+  body {
+    background-color: #0B0C0E;
+    color: #F4F4F5;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(225, 29, 72, 0.35);
+    color: #ffffff;
+  }
+}
+
+@layer utilities {
+  .container-vao {
+    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-10;
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .mask-radial-top {
+    mask-image: radial-gradient(ellipse 85% 70% at 50% 0%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 0%, black 30%, transparent 100%);
+  }
+
+  .mask-radial-center {
+    mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 25%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 25%, transparent 100%);
+  }
+}
+
+/* Efeito de iluminação Spotlight nos cards do portfólio */
+.spotlight-card {
+  position: relative;
+}
+
+.spotlight-card::before {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--spotlight-x) var(--spotlight-y),
+    rgba(225, 29, 72, 0.18),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Simulação de perfil LOG Flat vs Color Graded no monitor */
+.look-log-raw {
+  filter: saturate(0.35) contrast(0.78) brightness(1.06) sepia(0.08);
+}
+
+.look-color-graded {
+  filter: saturate(1.12) contrast(1.06) brightness(0.98);
+}
